@@ -1,0 +1,31 @@
+p {
+    font-size: 30px;
+    display: inline;
+}
+
+input, select {
+    font-size : 20px;
+    display: inline;
+    background-color: lightgray;
+}
+
+input {
+    width : 75px;
+}
+
+h1 {
+  font-size: 100px;
+}
+
+body {
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 15%, rgba(251,60,60,1) 88%, rgba(255,204,67,1) 100%);
+}
+
+#title {
+    color:darkgreen;
+}
+
+.val-container {
+    padding-top: 50px;
+}

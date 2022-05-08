@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Physics Calculator</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    </head>
+    <body>
+        <form id="values-form" method="post">
+            <h1 id="title">Physics Calculator</h1>
+            <div class="val-container">
+                <p>Mass: </p>
+                <input type="number" name="mass" value="1">
+                <select name="mass-units">
+                    <option value="kg">kilograms</option>
+                    <option value="lb">pounds</option>
+                    <option value="t">tons</option>
+                </select>
+            </div>
+            <br>
+            <div class="val-container">
+                <p>Position: x</p>
+                <input type="number" name="x" value="0">
+                <select name="x-units">
+                    <option value="m">meters</option>
+                    <option value="ft">feet</option>
+                    <option value="mi">miles</option>
+                    <option value="km">kilometers</option>
+                    <option value="au">AU</option>
+                    <option value="ly">light years</option>
+                </select>
+                <p>y</p>
+                <input type="number" name="y" value="0">
+                <select name="y-units">
+                    <option value="m">meters</option>
+                    <option value="ft">feet</option>
+                    <option value="mi">miles</option>
+                    <option value="km">kilometers</option>
+                    <option value="au">AU</option>
+                    <option value="ly">light years</option>
+                </select>
+            </div>
+            <br>
+            <div class="val-container">
+                <p>Velocity: </p>
+                <input type="number" name="vel" value="0">
+                <select name="vel-units">
+                    <option value="m/s">meters per second</option>
+                    <option value="mi/hr">miles per hour</option>
+                    <option value="km/hr">kilometers per hour</option>
+                    <option value="ft/s">feet per second</option>
+                    <option value="k">knots</option>
+                </select>
+            </div>
+            <div class="val-container">
+                <p>Angle: </p>
+                <input type="number" name="ang" value="0">
+                <select name="ang-units">
+                    <option value="dg">degrees</option>
+                    <option value="rd">radians</option>
+                </select>
+            </div>
+            <div class="val-container">
+                <p>Time to Simulate: </p>
+                <input type="number" name="time" value="1">
+                <select name="time-units">
+                    <option value="s">seconds</option>
+                    <option value="m">minutes</option>
+                    <option value="h">hours</option>
+                    <option value="d">days</option>
+                    <option value="mo">months</option>
+                    <option value="y">years</option>
+                </select>
+            </div>
+            <br>
+            <button type="submit" id="calculate-button">Calculate</button>
+        </div>
+    </body>
+    <script>
+        $(document).on("submit", "#values-form", function(e) {
+            e.preventDefault();
+            const form = document.getElementById("values-form");
+            var values = {};
+            Array.from(form.elements).forEach(element => {  
+                if (!(element.getAttribute("name") == null)) {
+                    values[element.getAttribute("name")] = element.value;
+                }
+            });
+            $.ajax({
+                type : 'POST',
+                url : '/',
+                data : values,
+            })
+        })
+    </script>
+</html>
