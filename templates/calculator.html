@@ -5,6 +5,7 @@
         <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
         <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <form id="values-form" method="post">
@@ -73,6 +74,10 @@
                     <option value="y">years</option>
                 </select>
             </div>
+            <div class="val-container" id="forces-div">
+                <p>Forces: </p>
+                <button onclick="addForce();"><i class="fa fa-plus"></i></button>
+            </div>
             <br>
             <button type="submit" id="calculate-button">Calculate</button>
         </div>
@@ -93,5 +98,42 @@
                 data : values,
             })
         })
+
+        const forcesDiv = document.getElementById("forces-div")
+        let forceCounter = 0;
+        function addForce() {
+            forceCounter++;
+            console.log(forceCounter)
+            const timeSelect=`<option value="s">seconds</option>
+                    <option value="m">minutes</option>
+                    <option value="h">hours</option>
+                    <option value="d">days</option>
+                    <option value="mo">months</option>
+                    <option value="y">years</option>`
+            const html = `<br>
+            <p>Name: </p>
+            <input type="text">
+            <p style="padding-left:20px;">Strength:</p>
+            <input name="force-${forceCounter}" type="number" value="1">
+            <p>newtons</p>
+            <p style="padding-left:20px;">Angle:</p>
+            <input name="force-${forceCounter}-ang" type="number" value="0">
+            <select name="force-${forceCounter}-ang-units">
+                <option value="dg">degrees</option>
+                <option value="rd">radians</option>
+            </select>
+            <p style="padding-left:20px;">Interval Active:</p>
+            <input name="force-${forceCounter}-start" type="number" value="0">
+            <select name="force-${forceCounter}-start-units">
+                ${timeSelect}
+            </select>
+            <p style="padding-left:10px; padding-right:10px;">to</p>
+            <input name="force-${forceCounter}-end" type="number" value="0">
+            <select name="force-${forceCounter}-end-units">
+                ${timeSelect}
+            </select>
+            `
+            forcesDiv.innerHTML = forcesDiv.innerHTML + html
+        }
     </script>
 </html>

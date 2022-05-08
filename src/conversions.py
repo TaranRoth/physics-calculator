@@ -44,3 +44,16 @@ def convert_to_standards(values):
     new_values["deg"] = int(values["ang"]) * to_deg[values["ang-units"]]
     new_values["sec"] = int(values["time"]) * to_sec[values["time-units"]]
     return new_values
+
+def convert_from_standards(original_values, values):
+    new_values = {}
+    new_values["mass"] = values["kg"] * (1/to_kg[original_values["mass-units"]])
+    new_values["x"] = values["x"] * (1/to_meters[original_values["x-units"]])
+    new_values["y"] = values["y"] * (1/to_meters[original_values["y-units"]])
+    new_values["vel"] = values["m/s"] * (1/to_mps[original_values["vel-units"]])
+    new_values["ang"] = values["deg"] * (1/to_deg[original_values["ang-units"]])
+    new_values["time"] = values["sec"] * (1/to_sec[original_values["time-units"]])
+    for key, value in original_values.items():
+        if key.find("units") != -1:
+            new_values[key] = value
+    return new_values

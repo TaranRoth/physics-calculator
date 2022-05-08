@@ -1,6 +1,12 @@
 p {
+    color: white;
     font-size: 30px;
     display: inline;
+}
+
+body {
+    background-image: url('physics-background.jpeg'); 
+    background-size: cover;
 }
 
 input, select {
@@ -17,10 +23,6 @@ h1 {
   font-size: 100px;
 }
 
-body {
-    background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 15%, rgba(251,60,60,1) 88%, rgba(255,204,67,1) 100%);
-}
 
 #title {
     color:darkgreen;
