@@ -21,9 +21,9 @@ to_mps = {
     "k" : 0.514444,
 }
 
-to_deg = {
-    "dg" : 1,
-    "rd" : 57.2958,
+to_rd = {
+    "rd" : 1,
+    "dg" : 0.0174533,
 }
 
 to_sec = {
@@ -41,8 +41,11 @@ def convert_to_standards(values):
     new_values["x"] = int(values["x"]) * to_meters[values["x-units"]]
     new_values["y"] = int(values["y"]) * to_meters[values["y-units"]]
     new_values["m/s"] = int(values["vel"]) * to_mps[values["vel-units"]]
-    new_values["deg"] = int(values["ang"]) * to_deg[values["ang-units"]]
+    new_values["rd"] = int(values["ang"]) * to_rd[values["ang-units"]]
     new_values["sec"] = int(values["time"]) * to_sec[values["time-units"]]
+    for key, value in values.items():
+        if "force" in key or "units" in key:
+            new_values[key] = value
     return new_values
 
 def convert_from_standards(original_values, values):
@@ -51,9 +54,9 @@ def convert_from_standards(original_values, values):
     new_values["x"] = values["x"] * (1/to_meters[original_values["x-units"]])
     new_values["y"] = values["y"] * (1/to_meters[original_values["y-units"]])
     new_values["vel"] = values["m/s"] * (1/to_mps[original_values["vel-units"]])
-    new_values["ang"] = values["deg"] * (1/to_deg[original_values["ang-units"]])
+    new_values["ang"] = values["rd"] * (1/to_rd[original_values["ang-units"]])
     new_values["time"] = values["sec"] * (1/to_sec[original_values["time-units"]])
     for key, value in original_values.items():
-        if key.find("units") != -1:
+        if "force" in key or "units" in key:
             new_values[key] = value
     return new_values

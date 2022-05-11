@@ -13,6 +13,6 @@ def calculator():
             values[value] = request.form.get(value)
         standard_values = conversions.convert_to_standards(values)
         obj = Object(standard_values)
-        print(standard_values)
-        print(conversions.convert_from_standards(values, standard_values))
+        obj.simulate()
+        print(obj.data)
     return render_template("calculator.html")

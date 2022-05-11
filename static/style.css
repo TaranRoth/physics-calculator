@@ -31,3 +31,7 @@ h1 {
 .val-container {
     padding-top: 50px;
 }
+
+input[type="checkbox" i] {
+    padding-left: 0px;
+}

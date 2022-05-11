@@ -58,8 +58,8 @@
                 <p>Angle: </p>
                 <input type="number" name="ang" value="0">
                 <select name="ang-units">
-                    <option value="dg">degrees</option>
                     <option value="rd">radians</option>
+                    <option value="dg">degrees</option>
                 </select>
             </div>
             <div class="val-container">
@@ -76,14 +76,18 @@
             </div>
             <div class="val-container" id="forces-div">
                 <p>Forces: </p>
-                <button onclick="addForce();"><i class="fa fa-plus"></i></button>
+                <button onclick="addForce();"><em class="fa fa-plus"></em></button>
+                <br>
+                <p>Gravity:</p>
+                <input type="checkbox" name="grav-checkbox" id="grav-checkbox" onchange="gravChanged();">
+                <div id="grav-input"></div>
             </div>
             <br>
             <button type="submit" id="calculate-button">Calculate</button>
         </div>
     </body>
     <script>
-        $(document).on("submit", "#values-form", function(e) {
+        $(document).on("submit", "#values-form", (e) => {
             e.preventDefault();
             const form = document.getElementById("values-form");
             var values = {};
@@ -103,7 +107,6 @@
         let forceCounter = 0;
         function addForce() {
             forceCounter++;
-            console.log(forceCounter)
             const timeSelect=`<option value="s">seconds</option>
                     <option value="m">minutes</option>
                     <option value="h">hours</option>
@@ -119,8 +122,8 @@
             <p style="padding-left:20px;">Angle:</p>
             <input name="force-${forceCounter}-ang" type="number" value="0">
             <select name="force-${forceCounter}-ang-units">
-                <option value="dg">degrees</option>
                 <option value="rd">radians</option>
+                <option value="dg">degrees</option>
             </select>
             <p style="padding-left:20px;">Interval Active:</p>
             <input name="force-${forceCounter}-start" type="number" value="0">
@@ -134,6 +137,16 @@
             </select>
             `
             forcesDiv.innerHTML = forcesDiv.innerHTML + html
+        }
+
+        function gravChanged() {
+            const checkbox = document.getElementById("grav-checkbox");
+            const gravDiv = document.getElementById("grav-input");
+            if (checkbox.checked) {
+                gravDiv.innerHTML = `<input type="number" name="grav-coeff" value="9.81">`;
+            } else {
+                gravDiv.innerHTML = ``;
+            }
         }
     </script>
 </html>
