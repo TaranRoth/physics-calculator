@@ -64,7 +64,7 @@
             </div>
             <div class="val-container">
                 <p>Time to Simulate: </p>
-                <input type="number" name="time" value="1">
+                <input type="number" name="time" value="1" id="time">
                 <select name="time-units">
                     <option value="s">seconds</option>
                     <option value="m">minutes</option>
@@ -131,7 +131,7 @@
                 ${timeSelect}
             </select>
             <p style="padding-left:10px; padding-right:10px;">to</p>
-            <input name="force-${forceCounter}-end" type="number" value="0">
+            <input name="force-${forceCounter}-end" id="force-${forceCounter}-end" type="number" value="${document.getElementById("time").value}" onchange="endChanged(${forceCounter});">
             <select name="force-${forceCounter}-end-units">
                 ${timeSelect}
             </select>
@@ -147,6 +147,12 @@
             } else {
                 gravDiv.innerHTML = ``;
             }
+        }
+
+        function endChanged(forceNum) {
+            const endInput = document.getElementById(`force-${forceNum}-end`);
+            const timeInput = document.getElementById("time");
+            if (endInput.value > timeInput.value) endInput.value = timeInput.value;
         }
     </script>
 </html>

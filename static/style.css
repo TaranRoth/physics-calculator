@@ -35,3 +35,8 @@ h1 {
 input[type="checkbox" i] {
     padding-left: 0px;
 }
+
+#values-form {
+    display: inline-block;
+
+}

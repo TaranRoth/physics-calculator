@@ -35,16 +35,20 @@ to_sec = {
     "y" : 31556952,
 }
 
+round_digits = 6
+
 def convert_to_standards(values):
     new_values = {}
-    new_values["kg"] = int(values["mass"]) * to_kg[values["mass-units"]]
-    new_values["x"] = int(values["x"]) * to_meters[values["x-units"]]
-    new_values["y"] = int(values["y"]) * to_meters[values["y-units"]]
-    new_values["m/s"] = int(values["vel"]) * to_mps[values["vel-units"]]
-    new_values["rd"] = int(values["ang"]) * to_rd[values["ang-units"]]
-    new_values["sec"] = int(values["time"]) * to_sec[values["time-units"]]
+    new_values["kg"] = float(values["mass"]) * to_kg[values["mass-units"]]
+    new_values["x"] = float(values["x"]) * to_meters[values["x-units"]]
+    new_values["y"] = float(values["y"]) * to_meters[values["y-units"]]
+    new_values["m/s"] = float(values["vel"]) * to_mps[values["vel-units"]]
+    new_values["rd"] = float(values["ang"]) * to_rd[values["ang-units"]]
+    new_values["sec"] = float(values["time"]) * to_sec[values["time-units"]]
     for key, value in values.items():
-        if "force" in key or "units" in key:
+        if "force" in key and "ang" in key and "units" not in key:
+            new_values[key] = float(value) * to_rd[values[f"{key}-units"]]
+        elif "units" in key or "force" in key:
             new_values[key] = value
     return new_values
 
@@ -57,6 +61,8 @@ def convert_from_standards(original_values, values):
     new_values["ang"] = values["rd"] * (1/to_rd[original_values["ang-units"]])
     new_values["time"] = values["sec"] * (1/to_sec[original_values["time-units"]])
     for key, value in original_values.items():
-        if "force" in key or "units" in key:
+        if "force" in key and "ang" in key and "units" not in key:
+            new_values[key] = value * (1/to_rd[original_values[f"{key}-units"]])
+        elif "units" in key or "force" in key:
             new_values[key] = value
     return new_values
