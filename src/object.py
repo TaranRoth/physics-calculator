@@ -4,19 +4,20 @@ from .physics import Force
 from .conversions import round_digits
 
 class Object:
-    data = {}
-    forces = []
-    current_time = 0
+
 
     def populate_forces(self):
         for key, value in self.data.items():
             if key[-1].isdigit():
                 self.forces.append(Force(float(value), float(self.data[f"{key}-ang"]), float(self.data[f"{key}-start"]), float(self.data[f"{key}-end"])))
 
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, d):
+        self.current_time = 0
+        self.data = {}
+        self.forces = []
+        for key, value in d.items():
+            self.data[key] = value
         self.populate_forces()
-        print(self.data)
 
     def get_rad(self, vert, hori):
         if vert < 0.00001 and vert > -0.00001:
@@ -24,20 +25,14 @@ class Object:
         if hori < 0.00001 and hori > -0.00001:
             hori = 0
         if vert == 0 and hori == 0:  
-            #print(1)
             return 0
         elif vert == 0 and hori > 0:
-            #print(2)
             return 0
         elif vert == 0 and hori < 0:
-            #print(3)
             return math.pi
         elif hori == 0 and vert > 0:
-            #print(4)
             return math.pi / 2
-        
         elif hori == 0 and vert < 0:
-            #print(5)
             return math.pi * 1.5
         #print(f"Vert: {vert}, hori: {hori}")
         return math.atan(vert / hori)
@@ -51,7 +46,6 @@ class Object:
                 hori_nforce += cos(force.ang).real * force.mag
         nforce_mag = math.sqrt(vert_nforce ** 2 + hori_nforce ** 2)
         nforce_ang = self.get_rad(vert_nforce, hori_nforce)
-        #print(f"nforce_ang: {nforce_ang}")
         return [nforce_mag, nforce_ang]
 
     def tick(self, time, current_time):
@@ -63,7 +57,7 @@ class Object:
         hori_vel = cos(nforce[1]).real * nforce[0] * time / self.data["kg"] + init_hori_vel
         self.data["x"] += (hori_vel + init_hori_vel) / 2 * time
         self.data["m/s"] = math.sqrt(vert_vel ** 2 + hori_vel ** 2)
-        self.data["rad"] = self.get_rad(vert_vel, hori_vel)
+        self.data["rd"] = self.get_rad(vert_vel, hori_vel)
 
     def simulate(self):
         times_to_tick = 100
