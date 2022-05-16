@@ -3,7 +3,7 @@ $(document).on("submit", "#values-form", (e) => {
     const form = document.getElementById("values-form");
     var values = {};
     Array.from(form.elements).forEach(element => {  
-        if (!(element.getAttribute("name") == null)) {
+        if (element.getAttribute("name") != null) {
             values[element.getAttribute("name")] = element.value;
         }
     });
@@ -48,7 +48,7 @@ function addForce() {
         ${timeSelect}
     </select>
     `
-    forcesDiv.innerHTML = forcesDiv.innerHTML + html
+    forcesDiv.innerHTML = forcesDiv.innerHTML + html;
 }
 
 function gravChanged() {

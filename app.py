@@ -3,7 +3,8 @@ import os
 from src import conversions
 from src.object import Object
 
-app = Flask(__name__, template_folder=os.path.dirname(os.path.abspath(__file__)) + "/templates")
+proj_folder = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, template_folder= proj_folder + "/templates")
 
 @app.route("/", methods=["GET", "POST"])
 def calculator():

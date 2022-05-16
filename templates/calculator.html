@@ -6,7 +6,6 @@
         <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='favicon.ico')}}">
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="calculator.js"></script>
     </head>
     <body>
         <form id="values-form" method="post">
@@ -87,6 +86,7 @@
             <br>
             <button type="submit" id="calculate-button">Calculate</button>
         </div>
+        <script src="{{url_for('static', filename='calculator.js')}}" type="text/javascript"></script>
     </body>
     
 </html>
