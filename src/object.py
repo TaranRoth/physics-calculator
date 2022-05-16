@@ -60,7 +60,7 @@ class Object:
         self.data["rd"] = self.get_rad(vert_vel, hori_vel)
 
     def simulate(self):
-        times_to_tick = 100
+        times_to_tick = 1000
         current_time = 0
         for i in range(times_to_tick):
             time_to_tick = float(self.data["sec"]) / times_to_tick

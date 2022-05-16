@@ -15,4 +15,4 @@ def calculator():
         obj = Object(standard_values)
         obj.simulate()
         print(obj.data)
-    return render_template("calculator.html")
+    return render_template("calculator.html", toSec=conversions.to_sec)
