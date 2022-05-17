@@ -44,7 +44,7 @@ function addForce() {
     </select>
     <p style="padding-left:10px; padding-right:10px;">to</p>
     <input name="force-${forceCounter}-end" id="force-${forceCounter}-end" type="number" value="${document.getElementById("time").value}" onchange="endChanged(${forceCounter});">
-    <select name="force-${forceCounter}-end-units">
+    <select name="force-${forceCounter}-end-units" id="force-${forceCounter}-end-units" onchange="endChanged(${forceCounter});">
         ${timeSelect}
     </select>
     `
@@ -60,10 +60,24 @@ function gravChanged() {
         gravDiv.innerHTML = ``;
     }
 }
+
+var toSec = {
+    "ms" : 0.001,
+    "s" : 1,
+    "m" : 60,
+    "h" : 3600,
+    "d" : 86400,
+    "mo" : 2628000,
+    "y" : 31556952,
+}
+
 function endChanged(forceNum) {
     const endInput = document.getElementById(`force-${forceNum}-end`);
     var endInputValue = endInput.value;
-    //endInputValue *= {{ toSec[document.getElementById(`force-${forceNum}-end-units`).value] }};
+    const endUnits = document.getElementById(`force-${forceNum}-end-units`).value;
+    endInputValue *= toSec[endUnits];
     const timeInput = document.getElementById("time").value;
-    if (endInputValue > timeInput) endInput.value = timeInput;
+    const timeUnits = document.getElementById("time-units").value
+    console.log(timeInput * toSec[timeUnits] * (1/toSec[endUnits]));
+    if (endInputValue > timeInput) endInput.value = timeInput * toSec[timeUnits] * (1/toSec[endUnits]);
 }

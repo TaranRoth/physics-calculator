@@ -16,4 +16,4 @@ def calculator():
         obj = Object(standard_values)
         obj.simulate()
         print(obj.data)
-    return render_template("calculator.html", toSec=conversions.to_sec)
+    return render_template("calculator.html", page_title="Physics Calculator", to_sec=conversions.to_sec)
