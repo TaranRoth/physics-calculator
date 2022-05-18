@@ -4,83 +4,85 @@
 {% endblock %}
 
 {% block body %}
-<form id="values-form" method="post">
-    <h1 id="title">Physics</h1>
-    <div class="val-container field field">
-        <label class="label">Mass: </label>
-        <input class="input" type="number" name="mass" value="1">
-        <select class="select" name="mass-units">
-            <option value="kg">kilograms</option>
-            <option value="lb">pounds</option>
-            <option value="t">tons</option>
-        </select>
-    </div>
-    <br>
-    <div class="val-container field">
-        <label class="label">Position: x</label>
-        <input class="input" type="number" name="x" value="0">
-        <select class="select" name="x-units">
-            <option value="m">meters</option>
-            <option value="ft">feet</option>
-            <option value="mi">miles</option>
-            <option value="km">kilometers</option>
-            <option value="au">AU</option>
-            <option value="ly">light years</option>
-        </select>
-        <label class="label">y</label>
-        <input class="input" type="number" name="y" value="0">
-        <select class="select" name="y-units">
-            <option value="m">meters</option>
-            <option value="ft">feet</option>
-            <option value="mi">miles</option>
-            <option value="km">kilometers</option>
-            <option value="au">AU</option>
-            <option value="ly">light years</option>
-        </select>
-    </div>
-    <br>
-    <div class="val-container field">
-        <label class="label">Velocity: </label>
-        <input class="input" type="number" name="vel" value="0">
-        <select class="select" name="vel-units">
-            <option value="m/s">meters per second</option>
-            <option value="mi/hr">miles per hour</option>
-            <option value="km/hr">kilometers per hour</option>
-            <option value="ft/s">feet per second</option>
-            <option value="k">knots</option>
-        </select>
-    </div>
-    <div class="val-container field">
-        <label class="label">Angle: </label>
-        <input class="input" type="number" name="ang" value="0">
-        <select class="select" name="ang-units">
-            <option value="rd">radians</option>
-            <option value="dg">degrees</option>
-        </select>
-    </div>
-    <div class="val-container field">
-        <label class="label">Time to Simulate: </label>
-        <input class="input" type="number" name="time" value="1" id="time">
-        <select class="select" name="time-units" id="time-units">
-            <option value="ms">milliseconds</option>
-            <option value="s" selected="selected">seconds</option>
-            <option value="m">minutes</option>
-            <option value="h">hours</option>
-            <option value="d">days</option>
-            <option value="mo">months</option>
-            <option value="y">years</option>
-        </select>
-    </div>
-    <div class="val-container field" id="forces-div">
-        <label class="label">Forces: </label>
-        <button onclick="addForce();" class="button"><em class="fa fa-plus"></em></button>
+<div class="box">
+    <form id="values-form" method="post">
+        <h1 id="title">Physics</h1>
+        <div class="val-container field box">
+            <label class="label">Mass: </label>
+            <input class="input" type="number" name="mass" value="1">
+            <select class="select" name="mass-units">
+                <option value="kg">kilograms</option>
+                <option value="lb">pounds</option>
+                <option value="t">tons</option>
+            </select>
+        </div>
         <br>
-        <label class="label">Gravity:</label>
-        <input class="checkbox" type="checkbox" name="grav-checkbox" id="grav-checkbox" onchange="gravChanged();">
-        <div id="grav"></div>
-    </div>
-    <br>
-    <button type="submit" id="calculate-button" class="button">Calculate</button>
+        <div class="val-container field box">
+            <label class="label">Position: x</label>
+            <input class="input" type="number" name="x" value="0">
+            <select class="select" name="x-units">
+                <option value="m">meters</option>
+                <option value="ft">feet</option>
+                <option value="mi">miles</option>
+                <option value="km">kilometers</option>
+                <option value="au">AU</option>
+                <option value="ly">light years</option>
+            </select>
+            <label class="label">y</label>
+            <input class="input" type="number" name="y" value="0">
+            <select class="select" name="y-units">
+                <option value="m">meters</option>
+                <option value="ft">feet</option>
+                <option value="mi">miles</option>
+                <option value="km">kilometers</option>
+                <option value="au">AU</option>
+                <option value="ly">light years</option>
+            </select>
+        </div>
+        <br>
+        <div class="val-container field box">
+            <label class="label">Velocity: </label>
+            <input class="input" type="number" name="vel" value="0">
+            <select class="select" name="vel-units">
+                <option value="m/s">meters per second</option>
+                <option value="mi/hr">miles per hour</option>
+                <option value="km/hr">kilometers per hour</option>
+                <option value="ft/s">feet per second</option>
+                <option value="k">knots</option>
+            </select>
+        </div>
+        <div class="val-container field box">
+            <label class="label">Angle: </label>
+            <input class="input" type="number" name="ang" value="0">
+            <select class="select" name="ang-units">
+                <option value="rd">radians</option>
+                <option value="dg">degrees</option>
+            </select>
+        </div>
+        <div class="val-container field box">
+            <label class="label">Time to Simulate: </label>
+            <input class="input" type="number" name="time" value="1" id="time">
+            <select class="select" name="time-units" id="time-units">
+                <option value="ms">milliseconds</option>
+                <option value="s" selected="selected">seconds</option>
+                <option value="m">minutes</option>
+                <option value="h">hours</option>
+                <option value="d">days</option>
+                <option value="mo">months</option>
+                <option value="y">years</option>
+            </select>
+        </div>
+        <div class="val-container field box" id="forces-div">
+            <label class="label">Forces: </label>
+            <button onclick="addForce();" class="button"><em class="fa fa-plus"></em></button>
+            <br>
+            <label class="label">Gravity:</label>
+            <input class="checkbox" type="checkbox" name="grav-checkbox" id="grav-checkbox" onchange="gravChanged();">
+            <div id="grav"></div>
+        </div>
+        <br>
+        <button type="submit" id="calculate-button" class="button">Calculate</button>
+    </form>
 </div>
 <script src="{{url_for('static', filename='calculator.js')}}" type="text/javascript"></script>
 {% endblock %}
