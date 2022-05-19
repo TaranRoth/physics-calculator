@@ -1,3 +1,42 @@
+.val-container {
+  position: relative;
+}
+
+.area {
+  position: fixed;
+  top: 300px;
+  width: 33%;
+  min-height: 47%;
+  border-radius: 250px;
+  border: 2px solid black;
+}
+
+#area-left {
+  left: 200px;
+}
+
+#area-right {
+  right: 200px;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input {
+  display: inline;
+}
+
+body {
+  background-image: url("stars.jpeg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 /*! bulma.io v0.9.4 | MIT License | github.com/jgthms/bulma */
 /* Bulma Utilities */
 .button, .input, .textarea, .select select, .file-cta,
@@ -492,8 +531,8 @@ table th {
 
 /* Bulma Elements */
 .box {
-  background-color: white;
-  border-radius: 10px;
+  background-color: #d6ccb2;
+  border-radius: 6px;
   -webkit-box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
           box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
   color: #4a4a4a;

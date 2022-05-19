@@ -4,10 +4,10 @@
 {% endblock %}
 
 {% block body %}
-<div class="box">
+<div class="area box" id="area-left">
     <form id="values-form" method="post">
-        <h1 id="title">Physics</h1>
-        <div class="val-container field box">
+        <h1 class="title">Enter Values</h1>
+        <div class="val-container field box is-horizontal">
             <label class="label">Mass: </label>
             <input class="input" type="number" name="mass" value="1">
             <select class="select" name="mass-units">
@@ -17,7 +17,7 @@
             </select>
         </div>
         <br>
-        <div class="val-container field box">
+        <div class="val-container field box is-horizontal">
             <label class="label">Position: x</label>
             <input class="input" type="number" name="x" value="0">
             <select class="select" name="x-units">
@@ -40,7 +40,7 @@
             </select>
         </div>
         <br>
-        <div class="val-container field box">
+        <div class="val-container field box is-horizontal">
             <label class="label">Velocity: </label>
             <input class="input" type="number" name="vel" value="0">
             <select class="select" name="vel-units">
@@ -51,7 +51,7 @@
                 <option value="k">knots</option>
             </select>
         </div>
-        <div class="val-container field box">
+        <div class="val-container field box is-horizontal">
             <label class="label">Angle: </label>
             <input class="input" type="number" name="ang" value="0">
             <select class="select" name="ang-units">
@@ -59,7 +59,7 @@
                 <option value="dg">degrees</option>
             </select>
         </div>
-        <div class="val-container field box">
+        <div class="val-container field box is-horizontal">
             <label class="label">Time to Simulate: </label>
             <input class="input" type="number" name="time" value="1" id="time">
             <select class="select" name="time-units" id="time-units">
@@ -72,7 +72,7 @@
                 <option value="y">years</option>
             </select>
         </div>
-        <div class="val-container field box" id="forces-div">
+        <div class="val-container field box is-horizontal" id="forces-div">
             <label class="label">Forces: </label>
             <button onclick="addForce();" class="button"><em class="fa fa-plus"></em></button>
             <br>
@@ -83,6 +83,9 @@
         <br>
         <button type="submit" id="calculate-button" class="button">Calculate</button>
     </form>
+</div>
+<div class="area box" id="area-right">
+    <h1 class="title">Results</h1>
 </div>
 <script src="{{url_for('static', filename='calculator.js')}}" type="text/javascript"></script>
 {% endblock %}

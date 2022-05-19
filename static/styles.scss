@@ -1,8 +1,48 @@
 @charset "utf-8";
 
 // Initial vars
+$box-background-color: #d6ccb2;
 $body-background-color: purple;
-$box-radius: 10px;
+
+
+.val-container {
+    position: relative;
+}
+
+.area {
+    position: fixed;
+    top: 300px;
+    width: 33%;
+    min-height: 47%;
+    border-radius: 250px;
+    border: 2px solid black;
+}
+
+#area-left {
+    left: 200px;
+}
+
+#area-right {
+    right: 200px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+input {
+    display: inline;
+}
+
+body {  
+    background-image: url("stars.jpeg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;  
+}
 
 // Import initial variables
 @import "../node_modules/bulma/bulma";
