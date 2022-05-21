@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
-import os
+from flask.cli import with_appcontext
+import os, click
 from src import conversions
 from src.object import Object
 from src.db import Database
@@ -7,9 +8,15 @@ from src.db import Database
 proj_folder = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__, template_folder= proj_folder + "/templates")
 
+@click.command("init-db")
+@with_appcontext
+def init_db_command():
+        db.init_db()
+
 with app.app_context():
     db = Database("app.db", proj_folder)
-    db.init_db()
+    app.teardown_appcontext(db.close_db)
+    app.cli.add_command(init_db_command)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

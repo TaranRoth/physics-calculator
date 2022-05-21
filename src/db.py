@@ -35,7 +35,7 @@ class Database:
             g.db.row_factory = sqlite3.Row
         return g.db
 
-    def close_db(self):
+    def close_db(self, e=None):
         db = g.pop('db', None)
         if db is not None:
             db.close()
@@ -44,6 +44,6 @@ class Database:
         db = self.get_db()
         with current_app.open_resource('src/schema.sql') as f:
             db.executescript(f.read().decode('utf8'))
-    
+
     def add_data(self, table_name, data):
         self.tables[table_name].add_data(self.get_db(), data)
