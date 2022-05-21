@@ -1,3 +1,4 @@
+var source = new EventSource(" {{url_for('sse.stream') }}")
 $(document).on("submit", "#values-form", (e) => {
     e.preventDefault();
     const form = document.getElementById("values-form");
@@ -12,6 +13,10 @@ $(document).on("submit", "#values-form", (e) => {
         url : '/',
         data : values,
     })
+    source.addEventListener("calculated", (ev) => {
+        var data = JSON.parse(ev.data);
+        console.log(data)
+    });
 })
 
 const forcesDiv = document.getElementById("forces-div")
@@ -27,23 +32,23 @@ function addForce() {
             <option value="y">years</option>`
     const html = `<br>
     <p>Name: </p>
-    <input type="text">
+    <input class="input" type="text">
     <p style="padding-left:20px;">Strength:</p>
-    <input name="force-${forceCounter}" type="number" value="1">
+    <input class="input" name="force-${forceCounter}" type="number" value="1">
     <p>newtons</p>
     <p style="padding-left:20px;">Angle:</p>
-    <input name="force-${forceCounter}-ang" type="number" value="0">
+    <input class="input" name="force-${forceCounter}-ang" type="number" value="0">
     <select name="force-${forceCounter}-ang-units">
         <option value="rd">radians</option>
         <option value="dg">degrees</option>
     </select>
     <p style="padding-left:20px;">Interval Active:</p>
-    <input name="force-${forceCounter}-start" type="number" value="0">
+    <input class="input" name="force-${forceCounter}-start" type="number" value="0">
     <select name="force-${forceCounter}-start-units">
         ${timeSelect}
     </select>
     <p style="padding-left:10px; padding-right:10px;">to</p>
-    <input name="force-${forceCounter}-end" id="force-${forceCounter}-end" type="number" value="${document.getElementById("time").value}" onchange="endChanged(${forceCounter});">
+    <input class="input" name="force-${forceCounter}-end" id="force-${forceCounter}-end" type="number" value="${document.getElementById("time").value}" onchange="endChanged(${forceCounter});">
     <select name="force-${forceCounter}-end-units" id="force-${forceCounter}-end-units" onchange="endChanged(${forceCounter});">
         ${timeSelect}
     </select>
@@ -55,7 +60,7 @@ function gravChanged() {
     const checkbox = document.getElementById("grav-checkbox");
     const gravDiv = document.getElementById("grav-input");
     if (checkbox.checked) {
-        gravDiv.innerHTML = `<input type="number" name="grav-coeff" value="9.81">`;
+        gravDiv.innerHTML = `<input class="input" type="number" name="grav-coeff" value="9.81">`;
     } else {
         gravDiv.innerHTML = ``;
     }

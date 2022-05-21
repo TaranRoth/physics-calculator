@@ -9,10 +9,10 @@
         <img class="img-responsive bg-img" src="../static/stars.jpeg" alt="Missing background image">
     </div>
 </section>
-<div class="area box" id="area-left">
+<div class="area box columns" id="area-left">
     <form id="values-form" method="post">
-        <h1 class="title">Enter Values</h1>
-        <div class="val-container field box is-horizontal">
+        <h1 class="title has-text-weight-bold has-text-centered">Enter Values</h1>
+        <div class="val-container field is-horizontal">
             <label class="label">Mass: </label>
             <input class="input" type="number" name="mass" value="1">
             <select class="select" name="mass-units">
@@ -22,8 +22,8 @@
             </select>
         </div>
         <br>
-        <div class="val-container field box is-horizontal">
-            <label class="label">Position: x</label>
+        <div class="val-container field is-horizontal">
+            <label class="label">Position: (</h1></label>
             <input class="input" type="number" name="x" value="0">
             <select class="select" name="x-units">
                 <option value="m">meters</option>
@@ -33,7 +33,7 @@
                 <option value="au">AU</option>
                 <option value="ly">light years</option>
             </select>
-            <label class="label">y</label>
+            <label class="label">, </h1></label>
             <input class="input" type="number" name="y" value="0">
             <select class="select" name="y-units">
                 <option value="m">meters</option>
@@ -43,9 +43,10 @@
                 <option value="au">AU</option>
                 <option value="ly">light years</option>
             </select>
+            <label class="label">)</h1></label>
         </div>
         <br>
-        <div class="val-container field box is-horizontal">
+        <div class="val-container field is-horizontal">
             <label class="label">Velocity: </label>
             <input class="input" type="number" name="vel" value="0">
             <select class="select" name="vel-units">
@@ -56,7 +57,7 @@
                 <option value="k">knots</option>
             </select>
         </div>
-        <div class="val-container field box is-horizontal">
+        <div class="val-container field is-horizontal">
             <label class="label">Angle: </label>
             <input class="input" type="number" name="ang" value="0">
             <select class="select" name="ang-units">
@@ -64,7 +65,7 @@
                 <option value="dg">degrees</option>
             </select>
         </div>
-        <div class="val-container field box is-horizontal">
+        <div class="val-container field is-horizontal">
             <label class="label">Time to Simulate: </label>
             <input class="input" type="number" name="time" value="1" id="time">
             <select class="select" name="time-units" id="time-units">
@@ -77,7 +78,7 @@
                 <option value="y">years</option>
             </select>
         </div>
-        <div class="val-container field box is-horizontal" id="forces-div">
+        <div class="val-container field is-horizontal" id="forces-div">
             <label class="label">Forces: </label>
             <button onclick="addForce();" class="button"><em class="fa fa-plus"></em></button>
             <br>
@@ -90,7 +91,20 @@
     </form>
 </div>
 <div class="area box" id="area-right">
-    <h1 class="title">Results</h1>
+    <h1 class="title has-text-weight-bold has-text-centered">Results</h1>
+    <div class="columns">
+        <div class="column is-one-fifth">
+            <label class="label" for="345"><h1 class="title is-2 pt-6">Mass:</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Position:</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Velocity:</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Angle:</h1></label>
+        </div>
+        <div class="column">
+            {% if data is defined %}
+            <h1 class="title is-2 pt-6" id="345">20</h1>
+            {% endif %}
+        </div>
+    </div>
 </div>
 <script src="{{url_for('static', filename='calculator.js')}}" type="text/javascript"></script>
 {% endblock %}
