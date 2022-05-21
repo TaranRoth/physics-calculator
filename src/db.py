@@ -1,5 +1,6 @@
 from flask import current_app, g
 import sqlite3
+from passlib.hash import pbkdf2_sha256 as pw
 
 class Table:
     def __init__(self, name):
@@ -10,6 +11,8 @@ class Table:
         }
 
     def add_data(self, conn, data):
+        if "password" in data.keys():
+            data["password"] = pw.hash(data["password"])
         string_data = ""
         for key, value in data.items():
             string_data += f"'{value}', "
