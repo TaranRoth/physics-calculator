@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS history;
-DROP TABLE IF EXISTS data;
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -13,9 +12,4 @@ CREATE TABLE history (
     data BLOB NOT NULL,
     time INTEGER NOT NULL
 
-);
-
-CREATE TABLE data (
-    user_id INTEGER NOT NULL,
-    
 );

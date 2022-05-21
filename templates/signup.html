@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="box field auth">
+    <form id="login-form" method="post">
+        <h1>Create an Account</h1>
+        <label>Username:</label>
+        <input class="input" name="username" id="username">
+        <label>Password:</Label>
+        <input class="input" name="password" id="password">
+        <button class="button" type="submit" id="signup-button">Create Account</button>
+    </form>
+</div>
+{% endblock %}
