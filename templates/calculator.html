@@ -1,6 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-end">
+        {% if "guest" in request.path %}
+        <a class="button is-light" href="{{ url_for('signup') }}"><strong>Sign up</strong></a>
+        <a class="button is-light" href="{{ url_for('login') }}"><strong>Log in</strong></a>
+        {% else %}
+        <a class="button is-light" href="{{ url_for('logout') }}"><strong>Log out</strong></a>
+        {% endif %}
+    </div>
+</nav>
 <section class="hero is-fullheight">
     <div class="hero-body">
         <img class="img-responsive bg-img" src="../static/stars.jpeg" alt="Missing background image">

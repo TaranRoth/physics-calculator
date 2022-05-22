@@ -1,4 +1,3 @@
-var source = new EventSource(" {{url_for('sse.stream') }}")
 $(document).on("submit", "#values-form", (e) => {
     e.preventDefault();
     const form = document.getElementById("values-form");
@@ -10,13 +9,9 @@ $(document).on("submit", "#values-form", (e) => {
     });
     $.ajax({
         type : 'POST',
-        url : '/',
+        url : window.location.href,
         data : values,
     })
-    source.addEventListener("calculated", (ev) => {
-        var data = JSON.parse(ev.data);
-        console.log(data)
-    });
 })
 
 const forcesDiv = document.getElementById("forces-div")
