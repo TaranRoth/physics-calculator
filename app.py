@@ -64,6 +64,8 @@ def calculator(username):
 
 @app.route("/")
 def index():
+    if "username" in session:
+        return redirect(f"calculator/{session['username']}")
     return redirect("/calculator/guest")
 
 @app.route("/logout")
