@@ -1,2 +1,7 @@
-import math
-print(math.atan(0))
+import json
+
+test = {
+    "hi":"bye",
+}
+
+print(json.loads(json.dumps(test)))

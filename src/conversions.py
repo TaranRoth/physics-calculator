@@ -1,3 +1,6 @@
+from tokenize import Number
+
+
 to_kg = {
     "kg" : 1,
     "lb" : 2.20462,
@@ -51,6 +54,8 @@ def convert_to_standards(values):
             new_values[key] = float(value) * to_rd[values[f"{key}-units"]]
         elif "units" in key or "force" in key:
             new_values[key] = value
+        elif key == "grav-coeff":
+            new_values["grav-coeff"] = value
     return new_values
 
 def convert_from_standards(original_values, values):
@@ -67,3 +72,12 @@ def convert_from_standards(original_values, values):
         elif "units" in key or "force" in key:
             new_values[key] = value
     return new_values
+
+def round_dict(data, digits):
+    for key, value in data.items():
+        if (type(value) == float or type(value) == int):
+            data[key] = round(value, digits)
+            if data[key] == -0:
+                data[key] = 0
+    return data
+

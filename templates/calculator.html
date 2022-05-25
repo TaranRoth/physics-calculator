@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 
 {% block body %}
+
+<meta id="settings" content="{{settings}}">
 <section class="hero is-fullheight">
     <div class="hero-body">
         <img class="img-responsive bg-img" src="../static/stars.jpeg" alt="Missing background image">
@@ -11,7 +13,7 @@
         <h1 class="title has-text-weight-bold has-text-centered">Enter Values</h1>
         <div class="val-container field is-horizontal">
             <label class="label">Mass: </label>
-            <input class="input" type="number" name="mass" value="1">
+            <input class="input" type="number" name="mass" step="any">
             <select class="select" name="mass-units">
                 <option value="kg">kilograms</option>
                 <option value="lb">pounds</option>
@@ -21,7 +23,7 @@
         <br>
         <div class="val-container field is-horizontal">
             <label class="label">Position: (</h1></label>
-            <input class="input" type="number" name="x" value="0">
+            <input class="input" type="number" name="x" step="any">
             <select class="select" name="x-units">
                 <option value="m">meters</option>
                 <option value="ft">feet</option>
@@ -31,7 +33,7 @@
                 <option value="ly">light years</option>
             </select>
             <label class="label">, </h1></label>
-            <input class="input" type="number" name="y" value="0">
+            <input class="input" type="number" name="y" step="any">
             <select class="select" name="y-units">
                 <option value="m">meters</option>
                 <option value="ft">feet</option>
@@ -45,7 +47,7 @@
         <br>
         <div class="val-container field is-horizontal">
             <label class="label">Velocity: </label>
-            <input class="input" type="number" name="vel" value="0">
+            <input class="input" type="number" name="vel" step="any">
             <select class="select" name="vel-units">
                 <option value="m/s">meters per second</option>
                 <option value="mi/hr">miles per hour</option>
@@ -56,7 +58,7 @@
         </div>
         <div class="val-container field is-horizontal">
             <label class="label">Angle: </label>
-            <input class="input" type="number" name="ang" value="0">
+            <input class="input" type="number" name="ang" step="any">
             <select class="select" name="ang-units">
                 <option value="rd">radians</option>
                 <option value="dg">degrees</option>
@@ -64,7 +66,7 @@
         </div>
         <div class="val-container field is-horizontal">
             <label class="label">Time to Simulate: </label>
-            <input class="input" type="number" name="time" value="1" id="time">
+            <input class="input" type="number" name="time" id="time" step="any">
             <select class="select" name="time-units" id="time-units">
                 <option value="ms">milliseconds</option>
                 <option value="s" selected="selected">seconds</option>
@@ -75,13 +77,13 @@
                 <option value="y">years</option>
             </select>
         </div>
-        <div class="val-container field is-horizontal" id="forces-div">
-            <label class="label">Forces: </label>
-            <button onclick="addForce();" class="button"><em class="fa fa-plus"></em></button>
-            <br>
+        <div class="val-container field" id="forces-div">
             <label class="label">Gravity:</label>
             <input class="checkbox" type="checkbox" name="grav-checkbox" id="grav-checkbox" onchange="gravChanged();">
             <div id="grav"></div>
+            <label class="label">Forces: </label>
+            <button onclick="addForce();" class="button"><em class="fa fa-plus"></em></button>
+            <br>
         </div>
         <br>
         <button type="submit" id="calculate-button" class="button">Calculate</button>
@@ -90,15 +92,12 @@
 <div class="area box" id="area-right">
     <h1 class="title has-text-weight-bold has-text-centered">Results</h1>
     <div class="columns">
-        <div class="column is-one-fifth">
-            <label class="label" for="345"><h1 class="title is-2 pt-6">Mass:</h1></label>
-            <label class="label"><h1 class="title is-2 pt-6">Position:</h1></label>
-            <label class="label"><h1 class="title is-2 pt-6">Velocity:</h1></label>
-            <label class="label"><h1 class="title is-2 pt-6">Angle:</h1></label>
-        </div>
         <div class="column">
             {% if data is defined %}
-            <h1 class="title is-2 pt-6" id="345">20</h1>
+            <label class="label"><h1 class="title is-2 pt-6">Mass {{ data["mass"] }}</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Position: ({{ data["x"] }}, {{ data["y"] }})</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Velocity: {{ data["vel"] }}</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Angle: {{ data["ang"] }}</h1></label>
             {% endif %}
         </div>
     </div>

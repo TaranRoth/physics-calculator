@@ -1,19 +1,3 @@
-$(document).on("submit", "#values-form", (e) => {
-    e.preventDefault();
-    const form = document.getElementById("values-form");
-    var values = {};
-    Array.from(form.elements).forEach(element => {  
-        if (element.getAttribute("name") != null) {
-            values[element.getAttribute("name")] = element.value;
-        }
-    });
-    $.ajax({
-        type : 'POST',
-        url : window.location.href,
-        data : values,
-    })
-})
-
 const forcesDiv = document.getElementById("forces-div")
 let forceCounter = 0;
 function addForce() {
@@ -25,35 +9,40 @@ function addForce() {
             <option value="d">days</option>
             <option value="mo">months</option>
             <option value="y">years</option>`
-    const html = `<br>
-    <p>Name: </p>
-    <input class="input" type="text">
-    <p style="padding-left:20px;">Strength:</p>
-    <input class="input" name="force-${forceCounter}" type="number" value="1">
-    <p>newtons</p>
-    <p style="padding-left:20px;">Angle:</p>
-    <input class="input" name="force-${forceCounter}-ang" type="number" value="0">
-    <select name="force-${forceCounter}-ang-units">
-        <option value="rd">radians</option>
-        <option value="dg">degrees</option>
-    </select>
-    <p style="padding-left:20px;">Interval Active:</p>
-    <input class="input" name="force-${forceCounter}-start" type="number" value="0">
-    <select name="force-${forceCounter}-start-units">
-        ${timeSelect}
-    </select>
-    <p style="padding-left:10px; padding-right:10px;">to</p>
-    <input class="input" name="force-${forceCounter}-end" id="force-${forceCounter}-end" type="number" value="${document.getElementById("time").value}" onchange="endChanged(${forceCounter});">
-    <select name="force-${forceCounter}-end-units" id="force-${forceCounter}-end-units" onchange="endChanged(${forceCounter});">
-        ${timeSelect}
-    </select>
+    const html = `<div class="val-container field is-horizontal>
+    <input type="radio" id="force-${forceCounter}-panel" name="accordion-select">
+        <div class="panel">
+            <label class="panel-heading" for="force-${forceCounter}-panel"><em class="fa fa-angle-right" id="force-${forceCounter}-dropdown"></em>Force ${forceCounter}</label>
+            <div class="panel-block body-${forceCounter}">
+                <p style="padding-left:20px;">Strength:</p>
+                <input class="input" name="force-${forceCounter}" type="number" value="1" step="any">
+                <p>newtons</p>
+                <p style="padding-left:20px;">Angle:</p>
+                <input class="input" name="force-${forceCounter}-ang" type="number" value="0" step="any">
+                <select name="force-${forceCounter}-ang-units">
+                    <option value="rd">radians</option>
+                    <option value="dg">degrees</option>
+                </select>
+                <p style="padding-left:20px;">Interval Active:</p>
+                <input class="input" name="force-${forceCounter}-start" type="number" value="0" step="any">
+                <select name="force-${forceCounter}-start-units">
+                    ${timeSelect}
+                </select>
+                <p style="padding-left:10px; padding-right:10px;">to</p>
+                <input class="input" name="force-${forceCounter}-end" id="force-${forceCounter}-end" type="number" value="${document.getElementById("time").value}" onchange="endChanged(${forceCounter});" step="any">
+                <select name="force-${forceCounter}-end-units" id="force-${forceCounter}-end-units" onchange="endChanged(${forceCounter});">
+                    ${timeSelect}
+                </select>
+            </div>
+        </div>
+    </div>
     `
     forcesDiv.innerHTML = forcesDiv.innerHTML + html;
 }
 
 function gravChanged() {
     const checkbox = document.getElementById("grav-checkbox");
-    const gravDiv = document.getElementById("grav-input");
+    const gravDiv = document.getElementById("grav");
     if (checkbox.checked) {
         gravDiv.innerHTML = `<input class="input" type="number" name="grav-coeff" value="9.81">`;
     } else {
@@ -81,3 +70,9 @@ function endChanged(forceNum) {
     console.log(timeInput * toSec[timeUnits] * (1/toSec[endUnits]));
     if (endInputValue > timeInput) endInput.value = timeInput * toSec[timeUnits] * (1/toSec[endUnits]);
 }
+$(document).ready(() => {
+    const settings = JSON.parse(document.getElementById("settings").content);
+    Object.entries(settings).forEach((item) => {
+        document.getElementsByName(item[0])[0].value = item[1];
+    })
+})

@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from flask.cli import with_appcontext
-import os, click
+import os, click, json
 from src import conversions
 from src.object import Object
 from src.db import Database
@@ -32,8 +32,8 @@ def login():
             session["username"] = username
             return redirect(f"/calculator/{username}")
         else:
-            return render_template("login.html", page_title="Login", error="That login is invalid")
-    return render_template("login.html", page_title="Login")
+            return render_template("login.html", page_title="Login", error="That login is invalid", logged_in=False)
+    return render_template("login.html", page_title="Login", logged_in=False)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -46,8 +46,8 @@ def signup():
             session["username"] = username
             return redirect(f"/calculator/{username}")
         else:
-            return render_template("signup.html", page_title="Create an Account", error="That username is taken")
-    return render_template("signup.html", page_title="Create an Account")
+            return render_template("signup.html", page_title="Create an Account", error="That username is taken", logged_in=False)
+    return render_template("signup.html", page_title="Create an Account", logged_in=False)
 
 @app.route("/calculator/<username>", methods=["GET", "POST"])
 def calculator(username):
@@ -60,7 +60,36 @@ def calculator(username):
         standard_values = conversions.convert_to_standards(values)
         obj = Object(standard_values)
         obj.simulate()
-    return render_template("calculator.html", page_title="Physics Calculator", to_sec=conversions.to_sec, logged_in="username" in session)
+        restored_data = conversions.round_dict(conversions.convert_from_standards(values, obj.data), 1)
+        return render_template("calculator.html", 
+        page_title="Physics Calculator", 
+        logged_in="username" in session, 
+        data=restored_data,
+        settings=json.dumps(values)
+        )
+    
+    return render_template("calculator.html", 
+    page_title="Physics Calculator", 
+    logged_in="username" in session,
+    settings=json.dumps({
+        "mass":"1",
+        "mass-units":"kg",
+        "x":"0",
+        "x-units":"m",
+        "y":"0",
+        "y-units":"m",
+        "vel":"0",
+        "vel-units":"m/s",
+        "ang":"0",
+        "ang-units":"rd",
+        "time":"1",
+        "time-units":"s"
+    })
+    )
+
+@app.route("/calculator/<username>", methods=["GET", "POST"])
+def history(username):
+    return render_template("history.html")
 
 @app.route("/")
 def index():

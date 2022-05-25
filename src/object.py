@@ -1,12 +1,13 @@
 from cmath import cos, sin
 import math
-from .physics import Force
+from .forces import Force
 from .conversions import round_digits
 
 class Object:
 
-
     def populate_forces(self):
+        if "grav-coeff" in self.data:
+            self.forces.append(Force(float(self.data["grav-coeff"]) * self.data["kg"], 3 * math.pi / 2, 0, self.data["sec"]))
         for key, value in self.data.items():
             if key[-1].isdigit():
                 self.forces.append(Force(float(value), float(self.data[f"{key}-ang"]), float(self.data[f"{key}-start"]), float(self.data[f"{key}-end"])))

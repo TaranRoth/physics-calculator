@@ -15,7 +15,7 @@
 
 .area {
     background-color: gray;
-    position: fixed;
+    position: absolute;
     top: 300px;
     width: 33%;
     min-height: 47%;
@@ -43,6 +43,21 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;  
+}
+
+.panel-block {
+    display: none;
+} 
+
+label.panel-heading {
+    cursor: pointer;
+    display: block;
+}
+
+
+#force-1-panel:checked ~ .panel > .body-1,
+#force-2-panel:checked ~ .panel > .body-2 {
+    display: flex;
 }
 
 // Import initial variables
