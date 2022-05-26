@@ -1,5 +1,21 @@
 {% extends "layout.html" %}
 
-{% block content %}
+{% block body %}
+
+{% for item in history %}
+<div class="card">
+    <header class="card-header">
+        <p class="card-header-title">Calculation on {{item["time-calculated"]}}</p>
+    </header>
+    <div class="card-content">
+        <div class="column">
+
+        </div>
+        <div class="column">
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
 
 {% endblock %}

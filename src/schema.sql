@@ -7,8 +7,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE history (
-    user_id INTEGER NOT NULL,
-    data BLOB NOT NULL,
+    username TEXT NOT NULL,
+    data TEXT NOT NULL,
     time INTEGER NOT NULL
-
 );

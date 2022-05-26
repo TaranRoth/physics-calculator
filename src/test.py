@@ -1,7 +1,3 @@
-import json
+import datetime
 
-test = {
-    "hi":"bye",
-}
-
-print(json.loads(json.dumps(test)))
+print(datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))

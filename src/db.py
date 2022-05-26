@@ -1,5 +1,5 @@
 from flask import current_app, g
-import sqlite3
+import sqlite3, json
 from passlib.hash import pbkdf2_sha256 as pw
 
 class Table:
@@ -7,7 +7,7 @@ class Table:
         self.name = name
         self.columns_by_table = {
             "users":"(username, password)",
-            "history" : "(user_id, data, time)",
+            "history" : "(username, data, time)",
         }
 
     def add_data(self, conn, data):
@@ -34,10 +34,19 @@ class Table:
         c = conn.cursor()
         c.execute(f"SELECT * FROM users WHERE username='{username}'")
         user = c.fetchall()
-        print(user)
         if len(user) == 0:
             return False
         return pw.verify(password, user[0][1])
+
+    def get_history(self, conn, username):
+        c = conn.cursor()
+        c.execute(f"SELECT * FROM history WHERE username='{username}'")
+        history_list = []
+        for i in c.fetchall():
+            history_dict = json.loads(i[1])
+            history_dict["time-calculated"] = i[2]
+            history_list.append(history_dict)
+        return history_list
 
 class Database:
     def __init__(self, name, app_path):
@@ -75,3 +84,6 @@ class Database:
 
     def login_valid(self, username, password):
         return self.tables["users"].login_valid(self.get_db(), username, password)
+
+    def get_history(self, username):
+        return self.tables["history"].get_history(self.get_db(), username)

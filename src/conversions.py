@@ -68,7 +68,7 @@ def convert_from_standards(original_values, values):
     new_values["time"] = values["sec"] * (1/to_sec[original_values["time-units"]])
     for key, value in original_values.items():
         if "force" in key and "ang" in key and "units" not in key:
-            new_values[key] = value * (1/to_rd[original_values[f"{key}-units"]])
+            new_values[key] = float(value) * (1/to_rd[original_values[f"{key}-units"]])
         elif "units" in key or "force" in key:
             new_values[key] = value
     return new_values

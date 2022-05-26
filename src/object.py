@@ -53,10 +53,10 @@ class Object:
         nforce = self.get_nforce(current_time)
         init_vert_vel = sin(self.data["rd"]).real * self.data["m/s"]
         vert_vel = sin(nforce[1]).real * nforce[0] * time / self.data["kg"] + init_vert_vel
-        self.data["y"] += (vert_vel + init_vert_vel) / 2 * time
+        self.data["y"] += vert_vel * time
         init_hori_vel = cos(self.data["rd"]).real * self.data["m/s"]
         hori_vel = cos(nforce[1]).real * nforce[0] * time / self.data["kg"] + init_hori_vel
-        self.data["x"] += (hori_vel + init_hori_vel) / 2 * time
+        self.data["x"] += hori_vel * time
         self.data["m/s"] = math.sqrt(vert_vel ** 2 + hori_vel ** 2)
         self.data["rd"] = self.get_rad(vert_vel, hori_vel)
 
