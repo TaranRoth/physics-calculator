@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 from flask.cli import with_appcontext
 import os, click, json, datetime
 from src import conversions
@@ -88,7 +88,6 @@ def calculator(username, settings=default_settings):
         data=restored_data,
         settings=json.dumps(values)
         )
-    
     return render_template("calculator.html", 
     page_title="Physics Calculator", 
     logged_in="username" in session,
@@ -99,7 +98,9 @@ def calculator(username, settings=default_settings):
 def history(username):
     if username != session["username"]:
         return redirect("/")
-    print(db.get_history(username))
+    if request.method == "POST":
+        time = request.form.get("time")
+        return render_template("calculator.html", page_title="Physics Calculator", logged_in=True, settings=db.get_settings(username, time))
     return render_template("history.html", 
     page_title=f"Calculator History",
     history=db.get_history(username),

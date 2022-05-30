@@ -2,20 +2,24 @@
 
 {% block body %}
 
-{% for item in history %}
-<div class="card">
-    <header class="card-header">
-        <p class="card-header-title">Calculation on {{item["time-calculated"]}}</p>
-    </header>
-    <div class="card-content">
-        <div class="column">
-
-        </div>
-        <div class="column">
-            
+<div class="history-container">
+    {% for item in history %}
+    <div class="history-item">
+        <div class="card">
+            <header class="card-header">
+                <p class="card-header-title">Calculation on {{item["time-calculated"]}}</strong></p>
+            </header>
+            <div class="card-content">
+                    <p><strong>Mass: {{ item["mass"] }}{{ item["mass-units"] }}</strong></p>
+                    <p><strong>Position: ({{ item["x"] }}{{ item["x-units"] }}, {{ item["y"] }}{{ item["y-units"] }})</strong></p>
+                    <p><strong>Velocity: {{ item["vel"] }}{{ item["vel-units"] }}</strong></p>
+                    <p><strong>Angle: {{ item["ang"] }}{{ item["ang-units"] }}</strong></p>
+                    <input type="button" value="Load" data-time="{{item["time-calculated"]}}" onclick="loadHistoryItem(this.dataset['time'])">
+            </div>
         </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+<script src="{{url_for('static', filename='history.js')}}" type="text/javascript"></script>
 
 {% endblock %}

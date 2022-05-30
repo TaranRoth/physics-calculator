@@ -48,6 +48,12 @@ class Table:
             history_list.append(history_dict)
         return history_list
 
+    def get_settings(self, conn, username, time):
+        c = conn.cursor()
+        c.execute(f"SELECT * FROM history WHERE username='{username}' AND time='{time}'")
+        row = c.fetchone()
+        return row[1]
+
 class Database:
     def __init__(self, name, app_path):
         self.path = f"{app_path}/data/{name}"
@@ -87,3 +93,6 @@ class Database:
 
     def get_history(self, username):
         return self.tables["history"].get_history(self.get_db(), username)
+
+    def get_settings(self, username, time):
+        return self.tables["history"].get_settings(self.get_db(), username, time)

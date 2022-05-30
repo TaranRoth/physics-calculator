@@ -9,5 +9,5 @@ CREATE TABLE users (
 CREATE TABLE history (
     username TEXT NOT NULL,
     data TEXT NOT NULL,
-    time INTEGER NOT NULL
+    time TEXT NOT NULL
 );

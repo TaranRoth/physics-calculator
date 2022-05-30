@@ -67,7 +67,6 @@ function endChanged(forceNum) {
     endInputValue *= toSec[endUnits];
     const timeInput = document.getElementById("time").value;
     const timeUnits = document.getElementById("time-units").value
-    console.log(timeInput * toSec[timeUnits] * (1/toSec[endUnits]));
     if (endInputValue > timeInput) endInput.value = timeInput * toSec[timeUnits] * (1/toSec[endUnits]);
 }
 $(document).ready(() => {

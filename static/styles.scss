@@ -1,5 +1,19 @@
 @charset "utf-8";
 
+html, body {
+    height: 100%;
+    margin : 0;
+}
+
+.bg-img { 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../static/stars.jpeg");
+    background-color: #999;
+    background-attachment: fixed;
+    height: 500%;
+}
 .val-container {
     position: relative;
 }
@@ -17,9 +31,8 @@
     background-color: gray;
     position: absolute;
     top: 300px;
-    width: 33%;
+    width: 28%;
     min-height: 47%;
-    border-radius: 250px;
     border: 5px solid white;
 }
 
@@ -37,14 +50,6 @@
     height: auto;
 }
 
-body {  
-    background-image: url("stars.jpeg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;  
-}
-
 .panel-block {
     display: none;
 } 
@@ -54,6 +59,19 @@ label.panel-heading {
     display: block;
 }
 
+.history-item {
+    background-color: gray;
+    position: relative;
+    width: 33%;
+    border: 5px solid white;
+    left: 50%;
+    transform: translate(-50%, 0);
+}   
+
+.history-container {
+    top: 20%;
+    transform: translate(0, 20%);
+}
 
 #force-1-panel:checked ~ .panel > .body-1,
 #force-2-panel:checked ~ .panel > .body-2 {
