@@ -89,10 +89,10 @@
     <div class="columns">
         <div class="column">
             {% if data is defined %}
-            <label class="label"><h1 class="title is-2 pt-6">Mass {{ data["mass"] }}</h1></label>
-            <label class="label"><h1 class="title is-2 pt-6">Position: ({{ data["x"] }}, {{ data["y"] }})</h1></label>
-            <label class="label"><h1 class="title is-2 pt-6">Velocity: {{ data["vel"] }}</h1></label>
-            <label class="label"><h1 class="title is-2 pt-6">Angle: {{ data["ang"] }}</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Mass {{ data["mass"] }}{{ data["mass-units"] }}</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Position: ({{ data["x"] }}{{ data["x-units"] }}, {{ data["y"] }}{{ data["y-units"] }})</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Velocity: {{ data["vel"] }}{{ data["vel-units"] }}</h1></label>
+            <label class="label"><h1 class="title is-2 pt-6">Angle: {{ data["ang"] }}{{data["ang-units"]}}</h1></label>
             {% endif %}
         </div>
     </div>

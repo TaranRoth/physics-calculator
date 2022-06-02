@@ -31,7 +31,7 @@ html, body {
   background-color: gray;
   position: absolute;
   top: 300px;
-  width: 28%;
+  min-width: 28%;
   min-height: 47%;
   border: 5px solid white;
 }

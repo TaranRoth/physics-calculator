@@ -71,7 +71,17 @@ function endChanged(forceNum) {
 }
 $(document).ready(() => {
     const settings = JSON.parse(document.getElementById("settings").content);
+    let fCounter = 0;
     Object.entries(settings).forEach((item) => {
+        if (item[0].indexOf("force") != -1) {
+            const firstDashIndex = item[0].indexOf("-");
+            const secondDashIndex = item[0].split("-", 2).join("-").length;
+            const forceNum = parseInt(item[0].substring(firstDashIndex + 1, secondDashIndex));
+            if (forceNum > fCounter) {
+                addForce();
+                fCounter++;
+            }
+        }
         document.getElementsByName(item[0])[0].value = item[1];
     })
 })
